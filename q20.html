@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<head>
+    <title>question 20</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .student-input {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>top students who scoare above 75</h1>
+    
+    <div id="student-form">
+        <div class="student-input">
+            <input type="text" id="student-name" placeholder="student name" required>
+            <input type="number" id="student-score" placeholder="score" required>
+            <button onclick="addStudent()">add student</button>
+        </div>
+    </div>
+
+    <button onclick="displayTopStudents()">show the list of top students</button>
+
+    <h2>top students (alphabetical order)</h2>
+    <ul id="top-students-list"></ul>
+
+    <script>
+        const students = [];
+
+        function addStudent() {
+            const name = document.getElementById('student-name').value;
+            const score = parseFloat(document.getElementById('student-score').value);
+
+            if (name && !isNaN(score)) {
+                students.push({ name, score });
+                document.getElementById('student-name').value = '';
+                document.getElementById('student-score').value = '';
+                alert('student added');
+            } else {
+                alert('enter a valid name/score');
+            }
+        }
+
+        function getTopStudents(students) {
+            const topStudents = students.filter(student => student.score > 75);
+            const topStudentNames = topStudents.map(student => student.name).sort();
+            return topStudentNames;
+        }
+
+        function displayTopStudents() {
+            const topStudents = getTopStudents(students);
+            const list = document.getElementById('top-students-list');
+            list.innerHTML = ''; 
+
+            if (topStudents.length === 0) {
+                list.innerHTML = '<li>nodbody scored above 75??????</li>';
+            } else {
+                topStudents.forEach(name => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = name;
+                    list.appendChild(listItem);
+                });
+            }
+        }
+    </script>
+
+</body>
+</html>

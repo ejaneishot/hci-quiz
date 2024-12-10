@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<head>
+    <title>q19 hci quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+        ul {
+            margin-top: 20px;
+            padding-left: 0;
+        }
+        li {
+            list-style-type: none;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>  
+    <div>
+        <input type="text" id="item-input" placeholder="enter an item" required>
+        <button onclick="addItem()">add to list</button>
+    </div>
+    
+    <div class="error" id="error-message"></div>
+
+    <h2>item list :</h2>
+    <ul id="item-list"></ul>
+
+    <script>
+        function addItem() {
+            const inputField = document.getElementById('item-input');
+            const itemList = document.getElementById('item-list');
+            const errorMessage = document.getElementById('error-message');
+
+            const itemValue = inputField.value.trim(); 
+        
+            errorMessage.textContent = '';
+
+            if (itemValue === '') {
+                
+                errorMessage.textContent = 'enter a valid item (dont leave it blank)';
+            } else {
+               
+                const listItem = document.createElement('li');
+                listItem.textContent = itemValue;
+                itemList.appendChild(listItem);
+
+                
+                inputField.value = '';
+            }
+        }
+    </script>
+
+</body>
+</html>
